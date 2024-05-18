@@ -8,7 +8,7 @@ let curso = argumento[3];
 let nivel = argumento[4];
 
 //agregar estudiantes {agregar}
-const agregar = async (nombre, rut, curso, nivel) => {
+const agregar = async () => {
   try {
   const consulta = "insert into datosAlumnos(nombre, rut, curso, nivel) values ($1, $2, $3, $4) returning *";
   const values = [nombre, rut, curso, nivel];
@@ -20,7 +20,7 @@ const agregar = async (nombre, rut, curso, nivel) => {
 
 
 //Obtener estudiante por rut {consultaRut}
-const consultaRut = async (rut) => {
+const consultaRut = async () => {
   try {
     const consulta = "select * from datosAlumnos where rut = $1";
     const values = [rut];
@@ -35,26 +35,26 @@ const verTodos = async () => {
   try {
   const consulta = "select * from datosAlumnos";
   const response = await pool.query(consulta);
-  console.log(response.rows);
+  console.log("Registro Actual:", response.rows);
 } catch (error) {
   console.log(error);}
 };
 
 //Actualizar datos estudiante {editar}
-const editar = async (nombre, rut, curso, nivel) => {
+const editar = async () => {
   try {
   const consulta =
     "UPDATE datosAlumnos SET nombre = $1, rut = $2, curso = $3, nivel = $4 WHERE rut = $2";
   const values = [nombre, rut, curso, nivel];
   const response = await pool.query(consulta, values);
-  console.log("Datos de Estudiante Actualizado");
+  console.log("Datos de Estudiante Actualizados");
 } catch (error) {
   console.log(error);}
 };
 
 
 //Eliminar registro estudiante {eliminar}
-const eliminar = async (rut) => {
+const eliminar = async () => {
   try {
   const consulta = "delete from datosAlumnos where rut = $1";
   const values = [rut];
